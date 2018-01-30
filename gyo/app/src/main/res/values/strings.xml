@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HPHT</string>
+    <string name="input_text" />
+    <string name="button_text">決定</string>
+    <string name="hip_count">0</string>
+    <string name="hip_list" />
+</resources>
