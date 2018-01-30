@@ -7,7 +7,7 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    private val hips: MutableList<String> = mutableListOf()
+    private val hips = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,13 +20,21 @@ class MainActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             val editText = editTextView.text.toString()
-            hips.add(editText)
-            val hipListCount = Integer.toString(hips.fold(0) { a, b -> a + 1 })
-            val hipListText = hips.takeLast(5).reduce{ a, b -> "$b\n$a" }
-            hipCount.text = hipListCount
-            hipList.text = hipListText
-            editTextView.text = ""
+
+            if (isValidNextHip(hips, editText)) {
+                hips.add(editText)
+                val hipListCount = Integer.toString(hips.fold(0) { a, b -> a + 1 })
+                val hipListText = hips.takeLast(5).reduce{ a, b -> "$b\n$a" }
+                hipCount.text = hipListCount
+                hipList.text = hipListText
+                editTextView.text = ""
+            }
+
         }
 
+    }
+
+    private fun isValidNextHip(hips: MutableList<String>, nextHip: String = ""): Boolean {
+        return hips.size == 0 || hips.last()[hips.last().length - 1] == nextHip[0]
     }
 }
